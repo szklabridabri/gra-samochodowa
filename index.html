@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forza Horizon - Multiplayer Demo</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <div id="overlay">
+    <section id="main-menu" class="panel active">
+      <h1>Horizon Drive Online</h1>
+      <p>Wejdź do świata otwartego i dołącz do lobby multiplayer.</p>
+      <div class="menu-grid">
+        <button data-target="lobby">Lobby multiplayer</button>
+        <button data-target="garage">Garaż</button>
+        <button data-target="settings">Ustawienia</button>
+      </div>
+    </section>
+
+    <section id="lobby" class="panel">
+      <h2>Lobby</h2>
+      <div class="form-row">
+        <label>Nick</label>
+        <input id="player-name" placeholder="Twój nick" />
+      </div>
+      <div class="form-row">
+        <label>Wybór auta</label>
+        <select id="car-select"></select>
+      </div>
+      <div class="form-row">
+        <label>Kolor nadwozia</label>
+        <input id="car-color" type="color" value="#44caff" />
+      </div>
+      <div class="actions">
+        <button id="join-game">Dołącz</button>
+        <button class="ghost" data-target="main-menu">Wstecz</button>
+      </div>
+      <div class="chat">
+        <h3>Czat</h3>
+        <div id="chat-messages"></div>
+        <form id="chat-form">
+          <input id="chat-input" placeholder="Napisz wiadomość..." />
+          <button>Wyślij</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="garage" class="panel">
+      <h2>Garaż</h2>
+      <div id="garage-list" class="garage-list"></div>
+      <div class="actions">
+        <button class="ghost" data-target="main-menu">Wstecz</button>
+      </div>
+    </section>
+
+    <section id="settings" class="panel">
+      <h2>Ustawienia</h2>
+      <div class="form-row">
+        <label>Tryb kamery</label>
+        <select id="camera-mode">
+          <option value="third">Trzecia osoba</option>
+          <option value="hood">Z maski</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Tryb sterowania</label>
+        <select id="control-mode">
+          <option value="classic">Klasyczny</option>
+          <option value="drift">Drift</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Muzyka w menu</label>
+        <input id="music-volume" type="range" min="0" max="100" value="35" />
+      </div>
+      <div class="actions">
+        <button class="ghost" data-target="main-menu">Wstecz</button>
+      </div>
+    </section>
+  </div>
+
+  <canvas id="minimap"></canvas>
+  <div id="hud">
+    <div id="speedometer">
+      <div class="dial"></div>
+      <span id="speed-value">0 km/h</span>
+      <span id="gear-value">Bieg 1</span>
+    </div>
+    <div id="nitro">
+      <div class="nitro-bar"></div>
+      <span>NITRO</span>
+    </div>
+  </div>
+
+  <div id="help">
+    <p>WASD - jazda | SHIFT - nitro | SPACE - drift | C - kamera</p>
+  </div>
+
+  <script src="client.js"></script>
+</body>
+</html>
